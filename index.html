@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<title>Private Page</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont,
+    "Helvetica Neue", Arial, sans-serif;
+    background: #fff;
+    color: #000;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    flex: 1;
+    min-height: calc(100vh - 50px);
+    min-height: calc(100dvh - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 24px;
+}
+
+.password-page,
+.email-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* LOCK */
+.lock {
+    width: 36px;
+    height: 46px;
+    margin-bottom: 48px;
+}
+
+.lock svg,
+.mail svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    fill: none;
+    stroke: #000;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.lock svg {
+    stroke-width: 4;
+}
+
+.keyhole {
+    fill: #000;
+    stroke: none;
+}
+
+/* PASSWORD */
+.form {
+    display: flex;
+    width: 100%;
+    max-width: 360px;
+    height: 48px;
+    border: 1px solid #999;
+    border-radius: 11px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.form input {
+    flex: 1;
+    min-width: 0;
+    padding: 0 14px;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.form input::placeholder {
+    color: #777;
+    opacity: 1;
+}
+
+.form button {
+    width: 34%;
+    border: none;
+    background: #222;
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.form button:active {
+    background: #444;
+}
+
+/* BACK HOME */
+.back {
+    margin-top: 38px;
+    color: #3478f6;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* EMAIL */
+.email-page {
+    display: none;
+    text-align: center;
+}
+
+.mail {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 14px;
+}
+
+.mail svg {
+    stroke-width: 2.3;
+}
+
+.email-title {
+    margin-bottom: 8px;
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.email-address {
+    color: #3478f6;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.email-description {
+    margin-top: 8px;
+    color: #888;
+    font-size: 12px;
+}
+
+/* COPYRIGHT */
+.footer {
+    flex-shrink: 0;
+    width: 100%;
+    padding: 10px 8px calc(30px + env(safe-area-inset-bottom));
+    color: #999;
+    background: #fff;
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: .2px;
+    text-align: center;
+}
+
+.email-page {
+    animation: fadeIn .35s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(7px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<main class="main">
+
+    <!-- PASSWORD PAGE -->
+    <section class="password-page" id="passwordPage">
+
+        <div class="lock">
+            <svg viewBox="0 0 64 80">
+                <path d="M16 32V19a16 16 0 0 1 32 0v13"/>
+                <rect x="7" y="29" width="50" height="45" rx="9"/>
+                <circle class="keyhole" cx="32" cy="50" r="3.5"/>
+            </svg>
+        </div>
+
+        <form class="form" id="passwordForm">
+            <input
+                id="passwordInput"
+                type="password"
+                placeholder="Password"
+                autocomplete="current-password"
+                required
+            >
+            <button type="submit">Submit</button>
+        </form>
+
+        <a href="/" class="back">Back to home</a>
+
+    </section>
+
+    <!-- EMAIL PAGE -->
+    <section class="email-page" id="emailPage">
+
+        <div class="mail">
+            <svg viewBox="0 0 64 64">
+                <rect x="5" y="12" width="54" height="40" rx="7"/>
+                <path d="M7 17 32 36 57 17"/>
+            </svg>
+        </div>
+
+        <h1 class="email-title">Email me</h1>
+
+        <a
+            class="email-address"
+            href="mailto:istiqbarr@gmail.com"
+        >
+            istiqbarr@gmail.com
+        </a>
+
+        <p class="email-description">
+            Feel free to get in touch.
+        </p>
+
+    </section>
+
+</main>
+
+<footer class="footer">
+    © 2026 Raisal-ist. All rights reserved.
+</footer>
+
+<script>
+const form = document.getElementById("passwordForm");
+const input = document.getElementById("passwordInput");
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    if (input.value === "raisal") {
+
+        document.getElementById("passwordPage").style.display = "none";
+        document.getElementById("emailPage").style.display = "flex";
+
+    } else {
+
+        alert("Incorrect password. Please try again.");
+        input.value = "";
+        input.focus();
+
+    }
+});
+</script>
+
+</body>
+</html>
